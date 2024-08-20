@@ -1,0 +1,32 @@
+{
+    "name": "Batman",
+    "short_name": "Ba",
+    "start_url": "/",
+    "display": "fullscreen",
+    "background_color": "#fdfdfd",
+    "theme_color": "#db4938",
+    "orientation": "landscape",
+    "description": "I am Batman",
+    "icons": [
+      {
+        "src": "/images/icons/icon-192x192.png",
+        "type": "image/png", "sizes": "192x192"
+      },
+      {
+        "src": "/images/icons/icon-892x620.png",
+        "type": "image/png", "sizes": "892x620"
+      }
+    ],
+    "screenshots": [
+      {
+        "src": "/images/icons/icon-892x620.png",
+        "type": "image/png", "sizes": "892x620",
+        "form_factor": "narrow"
+      },      
+      {
+        "src": "/images/icons/icon-892x620.png",
+        "type": "image/png", "sizes": "892x620",
+        "form_factor": "wide"
+      }
+    ]    
+  }
