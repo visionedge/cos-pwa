@@ -1,4 +1,4 @@
-const socket = new WebSocket('wss://cos-server.onrender.com:8081');
+const socket = new WebSocket('wss://cos-server.onrender.com/');
 
 socket.addEventListener('open', function (event) {
     console.log('Connected to the WebSocket server');
