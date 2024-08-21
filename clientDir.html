@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>R&D</title>
+  </head>
+  <body>
+    <main>
+      <h1>I am Batman!</h1>
+      <button type="button" id="createDirBtn">Click to create dir </button>
+    </main>
+    <script>  
+        document.getElementById('createDirBtn').addEventListener('click', async () => {
+            const dirHandle = await window.showDirectoryPicker();
+            const newDirHandle = await dirHandle.getDirectoryHandle('Tanuj', { create: true });
+            console.log('Directory created:', newDirHandle.name);
+        });
+    </script>
+  </body>
+</html>
