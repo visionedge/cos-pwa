@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Ajax Download</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+    <main>
+      <h1>Ajax Download</h1>
+    </main>
+<script>
+    function downloadJSONWithJQuery(url, filename) {
+        // Make an AJAX request to fetch the JSON file
+        $.ajax({
+            url: url,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                // Convert JSON data to a Blob
+                var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+
+                // Create a URL for the Blob
+                var blobUrl = URL.createObjectURL(blob);
+
+                // Create an anchor element and set the download attribute
+                var link = document.createElement('a');
+                link.href = blobUrl;
+                link.download = filename || 'data.json';  // Default filename if not provided
+
+                // Append the link to the document
+                document.body.appendChild(link);
+
+                // Programmatically click the link to trigger the download
+                link.click();
+
+                // Clean up by removing the link and revoking the Blob URL
+                document.body.removeChild(link);
+                URL.revokeObjectURL(blobUrl);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.error('Error downloading JSON:', textStatus, errorThrown);
+            }
+        });
+    }
+
+    // Usage example
+    $(document).ready(function() {
+        // Call the function to download the JSON file when the document is ready
+        downloadJSONWithJQuery('https://cos-pwa.onrender.com/mibs.json', 'myFile.json');
+    });
+</script>
+  
+  </body>
+</html>
