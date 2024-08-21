@@ -22,6 +22,20 @@ socket.addEventListener('error', function (error) {
     console.error('WebSocket error:', error);
 });
 
+function readJSON() {
+    const readURL = 'https://cos-pwa.onrender.com/mibs.json';
+    fetch(readURL)
+    .then(response => response.json()) // Parse the JSON from the response
+    .then(data => {
+        console.log('JSON data:', data); // Work with the JSON data
+    })
+    .catch(error => {
+        console.error('Error fetching the JSON file:', error);
+    });
+}
+// Function to read JSON from a given URL
+readJSON();
+
 function downloadJSON(url, filename) {
     // Use the fetch API to get the JSON data
     fetch(url)
@@ -59,18 +73,3 @@ function downloadJSON(url, filename) {
 }
 // Function to download JSON from a given URL
 downloadJSON('https://cos-pwa.onrender.com/mibs.json', 'myFile.json');
-
-
-function readJSON() {
-    const readURL = 'https://cos-pwa.onrender.com/mibs.json';
-    fetch(readURL)
-    .then(response => response.json()) // Parse the JSON from the response
-    .then(data => {
-        console.log('JSON data:', data); // Work with the JSON data
-    })
-    .catch(error => {
-        console.error('Error fetching the JSON file:', error);
-    });
-}
-// Function to read JSON from a given URL
-readJSON();
