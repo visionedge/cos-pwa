@@ -25,14 +25,20 @@ socket.addEventListener('error', function (error) {
 function readJSON() {
     const readURL = 'https://cos-pwa.onrender.com/mibs.json';
     fetch(readURL)
-    .then(response => response.json()) // Parse the JSON from the response
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+    })
     .then(data => {
-        console.log('JSON data:', data); // Work with the JSON data
+        console.log('JSON data:', data);
     })
     .catch(error => {
         console.error('Error fetching the JSON file:', error);
     });
 }
+
 // Function to read JSON from a given URL
 readJSON();
 
