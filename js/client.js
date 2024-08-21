@@ -22,45 +22,55 @@ socket.addEventListener('error', function (error) {
     console.error('WebSocket error:', error);
 });
 
-/* Download */
-// Function to download JSON from a given URL
-async function downloadJSON(url, filename) {
-    try {
-        // Fetch the JSON data from the URL
-        const response = await fetch(url);
-        
-        // Check if the request was successful
-        if (!response.ok) {
-            throw new Error(`Failed to fetch data: ${response.statusText}`);
-        }
-        
-        // Parse the JSON data
-        const jsonData = await response.json();
-        
-        // Convert JSON data to a Blob
-        const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
-        
-        // Create a URL for the Blob
-        const blobUrl = URL.createObjectURL(blob);
-        
-        // Create an anchor element and set the download attribute
-        const link = document.createElement('a');
-        link.href = blobUrl;
-        link.download = filename || 'data.json';  // Default filename if not provided
-        
-        // Append the link to the document
-        document.body.appendChild(link);
-        
-        // Programmatically click the link to trigger the download
-        link.click();
-        
-        // Clean up by removing the link and revoking the Blob URL
-        document.body.removeChild(link);
-        URL.revokeObjectURL(blobUrl);
-    } catch (error) {
-        console.error('Error downloading JSON:', error);
-    }
-}
+function downloadJSON(url, filename) {
+    // Use the fetch API to get the JSON data
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok ' + response.statusText);
+            }
+            return response.json();  // Parse the JSON data
+        })
+        .then(jsonData => {
+            // Convert JSON data to a Blob
+            const blob = new Blob([JSON.stringify(jsonData, null, 2)], { type: 'application/json' });
 
-// Usage example
+            // Create a URL for the Blob
+            const blobUrl = URL.createObjectURL(blob);
+
+            // Create an anchor element and set the download attribute
+            const link = document.createElement('a');
+            link.href = blobUrl;
+            link.download = filename || 'data.json';  // Default filename if not provided
+
+            // Append the link to the document
+            document.body.appendChild(link);
+
+            // Programmatically click the link to trigger the download
+            link.click();
+
+            // Clean up by removing the link and revoking the Blob URL
+            document.body.removeChild(link);
+            URL.revokeObjectURL(blobUrl);
+        })
+        .catch(error => {
+            console.error('Error downloading JSON:', error);
+        });
+}
+// Function to download JSON from a given URL
 downloadJSON('https://cos-pwa.onrender.com/mibs.json', 'myFile.json');
+
+
+function readJSON() {
+    const readURL = 'https://cos-pwa.onrender.com/mibs.json';
+    fetch(readURL)
+    .then(response => response.json()) // Parse the JSON from the response
+    .then(data => {
+        console.log('JSON data:', data); // Work with the JSON data
+    })
+    .catch(error => {
+        console.error('Error fetching the JSON file:', error);
+    });
+}
+// Function to read JSON from a given URL
+readJSON();
