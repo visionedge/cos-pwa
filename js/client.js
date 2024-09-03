@@ -93,4 +93,4 @@ function downloadJSON(url, filename) {
         });
 }
 // Function to download JSON from a given URL
-downloadJSON('https://cos-pwa.onrender.com/mibs.json', 'myFile.json');
+//downloadJSON('https://cos-pwa.onrender.com/mibs.json', 'myFile.json');
