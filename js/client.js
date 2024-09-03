@@ -32,7 +32,7 @@ function readJSON() {
         return response.json();
     })
     .then(data => {
-        console.log('JSON data:', data);
+        console.log('JSON data with fetch:', data);
     })
     .catch(error => {
         console.error('Error fetching the JSON file:', error);
@@ -41,6 +41,21 @@ function readJSON() {
 
 // Function to read JSON from a given URL
 readJSON();
+
+function readJSONAjax() {
+    const mibsUrl = 'https://cos-pwa.onrender.com/mibs.json';
+    $.ajax({
+        dataType: "json",
+        url: mibsUrl,
+        success: function(data) {
+            console.log('JSON data with Ajax:', data);
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) { 
+            console.log("Status: " + textStatus); alert("Error: " + errorThrown); 
+        }          
+    });
+}
+readJSONAjax();
 
 function downloadJSON(url, filename) {
     // Use the fetch API to get the JSON data
